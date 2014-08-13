@@ -1,12 +1,1 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-console.log('hello js13 games');
-
-console.log('hello again');
-
-var canvas = document.getElementById('game');
-var c = canvas.getContext('2d');
-
-c.rect(5, 5, 50, 10);
-c.fill();
-
-},{}]},{},[1]);
+!function e(r,n,o){function t(u,f){if(!n[u]){if(!r[u]){var l="function"==typeof require&&require;if(!f&&l)return l(u,!0);if(i)return i(u,!0);var a=new Error("Cannot find module '"+u+"'");throw a.code="MODULE_NOT_FOUND",a}var c=n[u]={exports:{}};r[u][0].call(c.exports,function(e){var n=r[u][1][e];return t(n?n:e)},c,c.exports,e,r,n,o)}return n[u].exports}for(var i="function"==typeof require&&require,u=0;u<o.length;u++)t(o[u]);return t}({1:[function(){console.log("hello js13 games"),console.log("hello again");var e=document.getElementById("game"),r=e.getContext("2d");r.rect(5,5,50,50),r.fill()},{}]},{},[1]);
