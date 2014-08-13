@@ -8,8 +8,9 @@
   "repository": "krzychukula/js13k-elements",
   "scripts": {
     "start": "./node_modules/.bin/gulp start",
-    "dist": "./node_modules/.bin/gulp dist",
-    "pub": "git subtree push --prefix build origin gh-pages"
+    "build": "./node_modules/.bin/gulp build --prod",
+    "pub": "git subtree push --prefix build origin gh-pages",
+    "dist": "./node_modules/.bin/gulp dist"
   },
   "devDependencies": {
     "browserify": "^5.9.1",
@@ -24,6 +25,7 @@
     "gulp-htmlmin": "^0.1.3",
     "gulp-if": "^1.2.4",
     "gulp-less": "^1.3.2",
+    "gulp-manifest": "0.0.6",
     "gulp-micro": "^1.0.0",
     "gulp-serve": "^0.2.0",
     "gulp-size": "^1.0.0",

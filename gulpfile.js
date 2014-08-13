@@ -18,6 +18,8 @@ var uglify = require('gulp-uglify');
 var zip = require('gulp-zip');
 var source = require('vinyl-source-stream');
 var serve = require('gulp-serve');
+var manifest = require('gulp-manifest');
+var replace = require('gulp-replace-task');
 
 program.on('--help', function(){
   console.log('  Tasks:');
@@ -54,12 +56,30 @@ gulp.task('build_source', function() {
 });
 
 gulp.task('build_index', function() {
+  console.log('prod', prod);
+
   return gulp.src('src/index.html')
+    .pipe(gulpif(prod, replace({
+        patterns: [
+          {
+            match: 'manifest',
+            replacement: 'manifest="app.manifest"'
+          }
+        ]
+      })))
     .pipe(gulpif(prod, htmlmin({
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      removeComments: true,
-    })))
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        removeComments: true,
+      })))
+    .pipe(gulpif(!prod, replace({
+        patterns: [
+          {
+            match: 'manifest',
+            replacement: ''
+          }
+        ]
+      })))
     .pipe(gulp.dest('build'));
 });
 
@@ -96,9 +116,21 @@ gulp.task('dist', ['build'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/**/*.js', ['lint', 'build_source']);
-  gulp.watch('src/styles.less', ['build_styles']);
-  gulp.watch('src/index.html', ['build_index']);
+  gulp.watch('src/**/*.js', ['lint', 'build_source', 'manifest']);
+  gulp.watch('src/styles.less', ['build_styles', 'manifest']);
+  gulp.watch('src/index.html', ['build_index', 'manifest']);
+});
+
+gulp.task('manifest', function(){
+  gulp.src(['build/*'])
+    .pipe(manifest({
+      hash: true,
+      preferOnline: true,
+      network: ['http://*', 'https://*', '*'],
+      filename: 'app.manifest',
+      exclude: 'app.manifest'
+     }))
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('serve', serve('build'));

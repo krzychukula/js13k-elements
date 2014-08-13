@@ -1,0 +1,20 @@
+CACHE MANIFEST
+
+
+CACHE:
+CNAME
+build.css
+build.js
+index.html
+
+
+NETWORK:
+http://*
+https://*
+*
+
+
+SETTINGS:
+prefer-online
+
+# hash: 6e177322dc7a054bbedfea8a3f7f0bd0ef289ff52f75c6575fc72287c605001b
