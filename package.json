@@ -6,6 +6,10 @@
   "author": "Krzysztof Kula",
   "license": "MIT",
   "repository": "krzychukula/js13k-elements",
+  "scripts": {
+      "start":"./node_modules/.bin/gulp build && ./node_modules/.bin/gulp watch",
+      "dist":"./node_modules/.bin/gulp dist"
+    },
   "devDependencies": {
     "browserify": "^5.9.1",
     "chalk": "^0.5.1",
