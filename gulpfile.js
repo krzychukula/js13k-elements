@@ -42,7 +42,7 @@ gulp.task('default', function() {
   program.help();
 });
 
-gulp.task('build', ['build_source', 'build_index', 'build_styles']);
+gulp.task('build', ['build_source', 'build_index', 'build_styles', 'manifest']);
 
 gulp.task('build_source', function() {
   return browserify()
@@ -128,7 +128,7 @@ gulp.task('manifest', function(){
       preferOnline: true,
       network: ['http://*', 'https://*', '*'],
       filename: 'app.manifest',
-      exclude: 'app.manifest'
+      exclude: ['app.manifest','CNAME']
      }))
     .pipe(gulp.dest('build'));
 });
