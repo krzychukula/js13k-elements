@@ -2,7 +2,6 @@ CACHE MANIFEST
 
 
 CACHE:
-CNAME
 build.css
 build.js
 index.html
@@ -17,4 +16,4 @@ https://*
 SETTINGS:
 prefer-online
 
-# hash: 6e177322dc7a054bbedfea8a3f7f0bd0ef289ff52f75c6575fc72287c605001b
+# hash: 63c19888139da07a879e26968d0acd91b057ec97092250a075932023078ccd2c
