@@ -11,5 +11,5 @@ http://gamedevelopment.tutsplus.com/articles/how-to-minify-your-html5-game-for-t
 * `npm start` for development
 * `npm run build` - to generate production build file with cache manifest
 * commit build folder
-* `npm run prod` to publish build to gh-pages
+* `npm run pub` to publish build to gh-pages
 * `npm run dist` to create zip file
