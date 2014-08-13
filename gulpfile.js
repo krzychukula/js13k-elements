@@ -17,6 +17,7 @@ var size = require('gulp-size');
 var uglify = require('gulp-uglify');
 var zip = require('gulp-zip');
 var source = require('vinyl-source-stream');
+var serve = require('gulp-serve');
 
 program.on('--help', function(){
   console.log('  Tasks:');
@@ -96,9 +97,39 @@ gulp.task('dist', ['build'], function() {
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*.js', ['lint', 'build_source']);
-  gulp.watch('src/styles.css', ['build_styles']);
+  gulp.watch('src/styles.less', ['build_styles']);
   gulp.watch('src/index.html', ['build_index']);
 });
+
+gulp.task('serve', serve('build'));
+
+gulp.task('flo', function(){
+  var flo = require('fb-flo'),
+    fs = require('fs');
+
+  flo(
+    'build',
+    {
+      port: 8888,
+      host: 'localhost',
+      verbose: false,
+      glob: [
+        '**/*.js',
+        '**/*.html',
+        '**/*.css'
+      ]
+    },
+    function resolver(filepath, callback) {
+      callback({
+        resourceURL: filepath,
+        contents: fs.readFileSync('build/' + filepath),
+        reload: filepath.match(/\.(js|html)$/),
+      });
+    }
+  );
+});
+
+gulp.task('start', ['build', 'serve', 'flo', 'watch']);
 
 function browserifyError(err) {
   gutil.log(chalk.red('ERROR'), chalk.gray(err.message));
