@@ -1,1 +1,12 @@
-canvas{background-color:#00f}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  background-color: blue;
+}
