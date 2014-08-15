@@ -1,37 +1,42 @@
 var raf = require('./raf');
 var rng = require('./rng');
+var fitCanvas = require('./fit-canvas');
 
 var canvas = document.querySelector('#game');
-var ctx = canvas.getContext('2d');
+var c = canvas.getContext('2d');
 
 var rand = rng();
 
+var firefightercolors = ['#FFFF4D']
+
 var balls = [];
 var colors = [
-  '#7FDBFF', '#0074D9', '#01FF70', '#001F3F', '#39CCCC',
-  '#3D9970', '#2ECC40', '#FF4136', '#85144B', '#FF851B',
-  '#B10DC9', '#FFDC00', '#F012BE',
+  '#FF0300', '#28CCC5',
 ];
 
 for (var i = 0; i < 50; i++) {
   balls.push({
     x: rand.int(canvas.width),
     y: rand.int(canvas.height / 2),
-    radius: rand.range(15, 35),
-    dx: rand.range(-100, 100),
-    dy: 0,
+    radius: rand.range(5, 10),
+    dx: rand.range(-1, 1),
+    dy: rand.range(-1, 1),
     color: rand.pick(colors)
   });
 }
 
+fitCanvas(canvas, window);
+canvas.style.backgroundColor = '#99653D';
+
+
 raf.start(function(elapsed) {
   // Clear the screen
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  c.clearRect(0, 0, canvas.width, canvas.height);
 
   // Update each balls
   balls.forEach(function(ball) {
     // Gravity
-    ball.dy += elapsed * 1500;
+    //ball.dy += elapsed * 1500;
 
     // Handle collision against the canvas's edges
     if (ball.x - ball.radius < 0 && ball.dx < 0 || ball.x + ball.radius > canvas.width && ball.dx > 0) ball.dx = -ball.dx * 0.7;
@@ -42,10 +47,10 @@ raf.start(function(elapsed) {
     ball.y += ball.dy * elapsed;
 
     // Render the ball
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.fillStyle = ball.color;
-    ctx.fill();
+    c.beginPath();
+    c.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
+    c.closePath();
+    c.fillStyle = ball.color;
+    c.fill();
   });
 });
