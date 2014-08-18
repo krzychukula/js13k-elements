@@ -133,7 +133,11 @@ gulp.task('manifest', function(){
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('serve', serve('build'));
+gulp.task('serve', serve({
+    root: ['build'],
+    port: 9000
+  })
+);
 
 gulp.task('flo', function(){
   var flo = require('fb-flo'),
